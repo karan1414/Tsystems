@@ -1,0 +1,8 @@
+langchain
+python-dotenv
+langchain-community
+ipykernel
+langchain-text-splitters
+langchain-openai
+faiss-cpu
+chromadb
