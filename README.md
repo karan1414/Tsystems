@@ -7,12 +7,6 @@ This project demonstrates how to use OpenAI's embeddings and language models to 
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Functions](#functions)
-  - [save_documents](#save_documents)
-  - [load_documents](#load_documents)
-  - [retrive_docs](#retrive_docs)
-  - [get_response](#get_response)
-  - [main](#main)
 - [Running in VS Code](#running-in-vs-code)
 - [License](#license)
 
