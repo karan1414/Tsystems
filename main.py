@@ -117,15 +117,10 @@ def main():
     st.write("Go ahead and ask question related to Tsystem press release")
     query = st.text_input("Search")
 
-    # retriver = chroma_db.as_retriever()
-    # relevant_docs = retriver.get_relevant_documents(query)[0].page_content
-    # context = " ".join(relevant_docs)
     llm = ChatOpenAI(temperature=temperature, api_key=api_key)
     docs = retrive_docs(chroma_db, llm, query)
 
     if not api_key:
-        # openai_client = openai.OpenAI(api_key=api_key)
-    # else:
         st.write("Please provide the open ai api key !")
     
     if query:
