@@ -8,7 +8,6 @@ This project demonstrates how to use OpenAI's embeddings and language models to 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Running in VS Code](#running-in-vs-code)
-- [License](#license)
 
 ## Installation
 
