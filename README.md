@@ -1,51 +1,100 @@
 
-### Workflow Explanation
+# Rag solution for telecom press release data
 
-1. **Import Necessary Libraries**:
-    - Import essential libraries such as `os`, `openai`, `logging`, and `streamlit`.
-    - Import specific functions and classes from `pprint`, `dotenv`, `langchain_community`, and `chromadb`.
+This project demonstrates a Retrieval-Augmented Generation (RAG) workflow using OpenAI's GPT-3.5-turbo model and Chroma for document storage and retrieval.
 
-2. **Set Up Environment Variables**:
-    - Load environment variables from a `.env` file using `load_dotenv()`.
-    - Set the `OPENAI_API_KEY` environment variable from the loaded environment variables.
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Files](#files)
+- [How to Use the .ipynb File](#how-to-use-the-ipynb-file)
 
-3. **Initialize OpenAI Client**:
-    - Create an OpenAI client instance using the API key from the environment variables.
+## Installation
 
-4. **Define `save_documents` Function**:
-    - **Purpose**: Save documents to a Chroma database.
-    - **Steps**:
-        - Initialize a `RecursiveCharacterTextSplitter` to split text into chunks.
-        - Iterate over the `release_data` to create documents.
-        - Create a Chroma database from the documents and embeddings.
-        - Persist the database to the specified directory.
+### Prerequisites
+- Python 3.8 or higher
+- pip (Python package installer)
 
-5. **Define `load_documents` Function**:
-    - **Purpose**: Load text documents from a specified folder.
-    - **Steps**:
-        - List all files in the specified folder.
-        - Read the content of each `.txt` file and append it to `release_data`.
-        - Return the list of loaded documents.
+### Steps
 
-6. **Define `get_llm_response` Function**:
-    - **Purpose**: Get a response from the LLM based on the provided context and query.
-    - **Steps**:
-        - Construct a prompt using the context and query.
-        - Use the OpenAI client to create a chat completion.
-        - Return the response content or log an error if an exception occurs.
+1. **Clone the repository**:
+    ```bash
+    git clone git@github.com:karan1414/Tsystems.git
+    cd yourproject
+    ```
 
-7. **Define `main` Function**:
-    - **Purpose**: Main workflow to manage document loading, saving, and querying.
-    - **Steps**:
-        - Initialize embeddings using `OpenAIEmbeddings`.
-        - Check if the Chroma database directory exists:
-            - If it exists, load the Chroma database.
-            - If it doesn't exist, load documents from the `data` folder and save them to the Chroma database.
-        - Define a query to retrieve relevant documents.
-        - Use the Chroma retriever to get relevant documents for the query.
-        - Construct the context from the retrieved documents.
-        - If a query is provided, get the LLM response and print it. Log appropriate messages if no response is received or if no query is provided.
+2. **Create a virtual environment**:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
 
-8. **Execute `main` Function**:
-    - Run the `main` function if the script is executed directly.
+3. **Install the required packages**:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
+4. **Set up the `.env` file**:
+    - Create a file named `.env` in the root directory of your project.
+    - Add your OpenAI API key to the `.env` file:
+        ```plaintext
+        OPENAI_API_KEY=your_openai_api_key_here
+        ```
+
+## Usage
+
+1. **Run the main script**:
+    ```bash
+    python main.py
+    ```
+
+2. **Interact with the script**:
+    - The script will load documents, save them to a Chroma database, and use the OpenAI API to generate responses based on queries.
+
+## Files
+
+- `main.py`: The main script containing the RAG workflow.
+- `requirements.txt`: Lists all the dependencies required for the project.
+- `.env`: Contains environment variables, such as API keys.
+- `data/`: Directory containing text files to be loaded and processed.
+
+## How to Use the .ipynb File
+
+### In Jupyter Notebook
+
+1. **Open Jupyter Notebook**:
+    ```bash
+    jupyter notebook
+    ```
+
+2. **Navigate to the project directory** and open the `.ipynb` file.
+
+3. **Run the cells**:
+    - Click on each cell and press `Shift + Enter` to execute the code.
+
+### In Visual Studio Code
+
+1. **Install VS Code**: Download and install [Visual Studio Code](https://code.visualstudio.com/).
+
+2. **Install the Python and Jupyter extensions**:
+    - Open VS Code.
+    - Go to the Extensions view by clicking the Extensions icon in the Activity Bar on the side of the window or by pressing `Ctrl+Shift+X`.
+    - Search for "Python" and "Jupyter" and install them.
+
+3. **Open the .ipynb file**:
+    - Open the project folder in VS Code.
+    - Click on the `.ipynb` file to open it in the editor.
+
+4. **Select the Python interpreter**:
+    - Click on the Python version in the bottom left corner of the window.
+    - Select the interpreter from the virtual environment you created earlier.
+
+5. **Run the cells**:
+    - Click on each cell and press `Shift + Enter` to execute the code.
+
+
+### `.env`
+
+```plaintext
+OPENAI_API_KEY=your_openai_api_key_here
+```
