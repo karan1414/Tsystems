@@ -1,53 +1,51 @@
-### Workflow Explanation
+## Workflow
 
-1. **Import Necessary Libraries**:
-    - Import essential libraries such as `os`, `openai`, `logging`, and `streamlit`.
-    - Import specific functions and classes from `pprint`, `dotenv`, `langchain_community`, and `chromadb`.
+1. **Initialization**:
+    - **Set up the environment**:
+        - Ensure the required packages are installed.
+        - Set the `OPENAI_API_KEY` environment variable with your OpenAI API key.
+        - Define the `PERSIS_DIR` for persisting the Chroma database.
 
-2. **Set Up Environment Variables**:
-    - Load environment variables from a `.env` file using `load_dotenv()`.
-    - Set the `OPENAI_API_KEY` environment variable from the loaded environment variables.
+2. **Loading or Saving Documents**:
+    - **Check if the persistence directory exists**:
+        - If it exists, load the Chroma database from the persistence directory using the `OpenAIEmbeddings` model.
+        - If it does not exist, load documents from the specified folder (`data`), save them to the Chroma database, and persist the database.
 
-3. **Initialize OpenAI Client**:
-    - Create an OpenAI client instance using the API key from the environment variables.
+3. **Loading Documents**:
+    - **Using LangChain's DirectoryLoader**:
+        - Load all text files from the specified directory using `DirectoryLoader` and `TextLoader`.
+        - Read the content of each text file and store it in a list.
 
-4. **Define `save_documents` Function**:
-    - **Purpose**: Save documents to a Chroma database.
-    - **Steps**:
-        - Initialize a `RecursiveCharacterTextSplitter` to split text into chunks.
-        - Iterate over the `release_data` to create documents.
-        - Create a Chroma database from the documents and embeddings.
+4. **Saving Documents**:
+    - **Split documents into chunks**:
+        - Use `RecursiveCharacterTextSplitter` to split each document into smaller chunks of 1000 characters.
+    - **Create a Chroma database**:
+        - Use the `Chroma.from_documents` method to create a Chroma database from the document chunks and embeddings.
         - Persist the database to the specified directory.
 
-5. **Define `load_documents` Function**:
-    - **Purpose**: Load text documents from a specified folder.
-    - **Steps**:
-        - List all files in the specified folder.
-        - Read the content of each `.txt` file and append it to `release_data`.
-        - Return the list of loaded documents.
+5. **Retrieving Documents**:
+    - **Create a retriever**:
+        - Use `MultiQueryRetriever.from_llm` to create a retriever from the language model and Chroma database.
+    - **Invoke the retriever**:
+        - Use the retriever to search for documents based on the query and return a list of unique documents.
 
-6. **Define `get_llm_response` Function**:
-    - **Purpose**: Get a response from the LLM based on the provided context and query.
-    - **Steps**:
-        - Construct a prompt using the context and query.
-        - Use the OpenAI client to create a chat completion.
-        - Return the response content or log an error if an exception occurs.
+6. **Generating Responses**:
+    - **Create a prompt template**:
+        - Use `ChatPromptTemplate.from_messages` to create a prompt template for the language model.
+    - **Create a chain**:
+        - Use `create_stuff_documents_chain` to create a chain that processes the documents and generates a response.
+    - **Invoke the chain**:
+        - Use the chain to generate a response from the language model based on the provided documents and query.
 
-7. **Define `main` Function**:
-    - **Purpose**: Main workflow to manage document loading, saving, and querying.
-    - **Steps**:
-        - Initialize embeddings using `OpenAIEmbeddings`.
-        - Check if the Chroma database directory exists:
-            - If it exists, load the Chroma database.
-            - If it doesn't exist, load documents from the `data` folder and save them to the Chroma database.
-        - Define a query to retrieve relevant documents.
-        - Use the Chroma retriever to get relevant documents for the query.
-        - Construct the context from the retrieved documents.
-        - If a query is provided, get the LLM response and print it. Log appropriate messages if no response is received or if no query is provided.
-
-8. **Run Stand alone version**:
-    - Run the all the cells and finally run `main` function in the Tsystems.ipynb file if the script is executed directly.
-
-9. **Run interactive version**:
-    - Run on streamlit to run the interactive version of the solution run `streamlit run main.py`
-
+7. **Main Function**:
+    - **Initialize the embeddings model**:
+        - Use `OpenAIEmbeddings` with the specified model.
+    - **Load or save documents**:
+        - Check if the persistence directory exists and load or save documents accordingly.
+    - **Define the query**:
+        - Specify the query to be used for document retrieval.
+    - **Retrieve documents**:
+        - Use the `retrive_docs` function to retrieve documents from the Chroma database based on the query.
+    - **Generate and print the response**:
+        - Use the `get_response` function to generate a response from the language model based on the retrieved documents and query.
+        - Print the response if available, otherwise log an appropriate message.

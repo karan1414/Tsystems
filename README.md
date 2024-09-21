@@ -1,100 +1,82 @@
 
-# Rag solution for telecom press release data
+# Document Retrieval and Response Generation
 
-This project demonstrates a Retrieval-Augmented Generation (RAG) workflow using OpenAI's GPT-3.5-turbo model and Chroma for document storage and retrieval.
+This project demonstrates how to use OpenAI's embeddings and language models to create a document retrieval and response generation system. The system saves documents to a Chroma database, retrieves relevant documents based on a query, and generates responses using a language model.
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
-- [Files](#files)
-- [How to Use the .ipynb File](#how-to-use-the-ipynb-file)
+- [Functions](#functions)
+  - [save_documents](#save_documents)
+  - [load_documents](#load_documents)
+  - [retrive_docs](#retrive_docs)
+  - [get_response](#get_response)
+  - [main](#main)
+- [Running in VS Code](#running-in-vs-code)
+- [License](#license)
 
 ## Installation
 
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package installer)
-
-### Steps
-
-1. **Clone the repository**:
-    ```bash
+1. Clone the repository:
+    ```sh
     git clone git@github.com:karan1414/Tsystems.git
-    cd yourproject
+    cd document-retrieval
     ```
 
-2. **Create a virtual environment**:
-    ```bash
+2. Create a virtual environment:
+    ```sh
     python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
-3. **Install the required packages**:
-    ```bash
+3. Activate the virtual environment:
+    - On Windows:
+        ```sh
+        venv\Scripts\activate
+        ```
+    - On macOS/Linux:
+        ```sh
+        source venv/bin/activate
+        ```
+
+4. Install the required packages:
+    ```sh
     pip install -r requirements.txt
     ```
 
-4. **Set up the `.env` file**:
-    - Create a file named `.env` in the root directory of your project.
-    - Add your OpenAI API key to the `.env` file:
-        ```plaintext
-        OPENAI_API_KEY=your_openai_api_key_here
-        ```
+5. Set up your OpenAI API key:
+    ```sh
+    export OPENAI_API_KEY='your_openai_api_key'
+    ```
 
 ## Usage
 
-1. **Run the main script**:
-    ```bash
+1. Place your text files in the `data` directory.
+
+2. Run the main script:
+    ```sh
     python main.py
     ```
 
-2. **Interact with the script**:
-    - The script will load documents, save them to a Chroma database, and use the OpenAI API to generate responses based on queries.
 
-## Files
+## Running in VS Code
 
-- `main.py`: The main script containing the RAG workflow.
-- `requirements.txt`: Lists all the dependencies required for the project.
-- `.env`: Contains environment variables, such as API keys.
-- `data/`: Directory containing text files to be loaded and processed.
-
-## How to Use the .ipynb File
-
-### In Jupyter Notebook
-
-1. **Open Jupyter Notebook**:
-    ```bash
-    jupyter notebook
-    ```
-
-2. **Navigate to the project directory** and open the `.ipynb` file.
-
-3. **Run the cells**:
-    - Click on each cell and press `Shift + Enter` to execute the code.
-
-### In Visual Studio Code
-
-1. **Install VS Code**: Download and install [Visual Studio Code](https://code.visualstudio.com/).
-
-2. **Install the Python and Jupyter extensions**:
+1. **Open the project in VS Code**:
     - Open VS Code.
-    - Go to the Extensions view by clicking the Extensions icon in the Activity Bar on the side of the window or by pressing `Ctrl+Shift+X`.
-    - Search for "Python" and "Jupyter" and install them.
+    - Click on `File` > `Open Folder` and select the project directory.
 
-3. **Open the .ipynb file**:
-    - Open the project folder in VS Code.
-    - Click on the `.ipynb` file to open it in the editor.
+2. **Set up the virtual environment in VS Code**:
+    - Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS).
+    - Type `Python: Select Interpreter` and select the virtual environment you created (`venv`).
 
-4. **Select the Python interpreter**:
-    - Click on the Python version in the bottom left corner of the window.
-    - Select the interpreter from the virtual environment you created earlier.
+3. **Install the required extensions**:
+    - Install the Python extension for VS Code if you haven't already.
 
-5. **Run the cells**:
-    - Click on each cell and press `Shift + Enter` to execute the code.
+4. **Run the script in an IPython notebook**:
+    - Create a new Jupyter notebook file (`.ipynb`) in the project directory.
 
+5. **Run the notebook cells**:
+    - Execute each cell in the notebook to run the code and see the output.
 
-### `.env`
-
-```plaintext
-OPENAI_API_KEY=your_openai_api_key_here
-```
+6. **Running interactive version i.e main.py**
+    - Go to the directory containing main.py and run `streamlit run main.py`
